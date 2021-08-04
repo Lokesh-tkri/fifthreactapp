@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import MyAwesomeTable from './MyAwesomeTable';
 import './App.css';
+import axios from 'axios'
+import { useEffect, useState } from 'react';
+
 
 function App() {
+  const [posts, setPosts] = useState([])
+
+  function getPosts(){
+    axios.get("https://jsonplaceholder.typicode.com/posts").then(resp => setPosts(resp.data))
+  }
+
+  useEffect(getPosts,[])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    
+      <MyAwesomeTable dummyrows={posts}/>
+    
+  )
 }
 
 export default App;
